@@ -1,4 +1,5 @@
-﻿using WpfMvvmExample.Logic.Commands;
+﻿using WpfMvvmExample.Data.Models;
+using WpfMvvmExample.Logic.Commands;
 using WpfMvvmExample.Logic.Stores;
 
 namespace WpfMvvmExample.Logic.ViewModels;
@@ -41,28 +42,26 @@ public class StudentViewModel : ViewModelBase
             OnPropertyChanged(nameof(Class));
         }
     }
-    public BaseCommand SubmitCommand { get; private init; }
-    public BaseCommand CancelCommand { get; private init; }
+    public CommandBase SubmitCommand { get; private init; }
+    public CommandBase CancelCommand { get; private init; }
 
-    private readonly NavigationStore _navigationStore;
+    private Action<Student> _createStudentAction;
+
     private string _firstName = "";
     private string _lastName = "";
     private string _age = "";
     private string _class = "";
+    private readonly NavigationStore _navigationStore;
+    private readonly ViewModelBase _previousViewModel;
 
-    public StudentViewModel(NavigationStore navigationStore)
+    public StudentViewModel(NavigationStore navigationStore, ViewModelBase previousViewModel, Action<Student> createStudentAction)
     {
+        _createStudentAction = createStudentAction;
         _navigationStore = navigationStore;
+        _previousViewModel = previousViewModel;
 
-        CancelCommand = new ExecuteCommand(() =>
-        {
-            _navigationStore.CurrentViewModel = new StudentsListViewModel(_navigationStore);
-        });
-
-        SubmitCommand = new ExecuteCommand(() =>
-        {
-
-        }, CanSubmiteCommandExecute);
+        CancelCommand = new ExecuteCommand(GoBackToPreviousViewModel);
+        SubmitCommand = new ExecuteCommand(CreateStudent, CanSubmiteCommandExecute);
     }
 
     protected override void OnPropertyChanged(string? propertyName)
@@ -71,6 +70,18 @@ public class StudentViewModel : ViewModelBase
 
         SubmitCommand.OnCanExecuteChanged();
     }
+
+    private void CreateStudent()
+    {
+        Student student = new(FirstName, LastName, Age, Class);
+
+        _createStudentAction(student);
+
+        GoBackToPreviousViewModel();
+    }
+
+    private void GoBackToPreviousViewModel()
+        => _navigationStore.CurrentViewModel = _previousViewModel;
 
     private bool CanSubmiteCommandExecute()
         => !string.IsNullOrEmpty(FirstName) &&

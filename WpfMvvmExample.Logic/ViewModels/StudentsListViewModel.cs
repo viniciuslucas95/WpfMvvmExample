@@ -18,13 +18,11 @@ public class StudentsListViewModel : ViewModelBase
     {
         _navigationStore = navigationStore;
 
-        _students.Add(new Student("Carlos", "Daniel de Almeida", "20", "EPCAR"));
-        _students.Add(new Student("Ana", "Cláudia", "46", "ESPEX"));
-        _students.Add(new Student("Fátima", "Bernardes", "250", "EPCAR"));
+        GoToStudentPageCommand = new ExecuteCommand(() => _navigationStore.CurrentViewModel = new StudentViewModel(_navigationStore, this, AddStudent));
+    }
 
-        GoToStudentPageCommand = new ExecuteCommand(() =>
-        {
-            _navigationStore.CurrentViewModel = new StudentViewModel(_navigationStore);
-        });
+    private void AddStudent(Student student)
+    {
+        _students.Add(student);
     }
 }

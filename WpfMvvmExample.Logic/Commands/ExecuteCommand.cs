@@ -1,6 +1,6 @@
 ﻿namespace WpfMvvmExample.Logic.Commands;
 
-public class ExecuteCommand : BaseCommand
+public class ExecuteCommand : CommandBase
 {
     private readonly Action _action;
     private readonly Func<bool>? _canExecute;
