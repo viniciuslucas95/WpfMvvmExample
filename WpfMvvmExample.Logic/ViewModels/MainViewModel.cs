@@ -1,11 +1,21 @@
-﻿namespace WPFTest.ViewModels;
+﻿using WpfMvvmExample.Logic.Stores;
+
+namespace WpfMvvmExample.Logic.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public ViewModelBase CurrentViewModel { get; private init; }
+    private readonly NavigationStore _navigationStore;
 
-    public MainViewModel()
+    public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+    public MainViewModel(NavigationStore navigationStore)
     {
-        CurrentViewModel = new StudentsListViewModel();
+        _navigationStore = navigationStore;
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+    }
+
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentViewModel));
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace WPFTest.Models;
+﻿namespace WpfMvvmExample.Data.Models;
 
 public class Student : Model
 {

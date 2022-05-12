@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="WPFTest.Views.StudentView"
+﻿<UserControl x:Class="WpfMvvmExample.Views.StudentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewmodels="clr-namespace:WPFTest.ViewModels"
+             xmlns:viewmodels="clr-namespace:WpfMvvmExample.Logic.ViewModels;assembly=WpfMvvmExample.Logic"
              d:DataContext="{d:DesignInstance Type=viewmodels:StudentViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450"
@@ -155,7 +155,7 @@
                 <Button
                     Grid.Column="0"
                     Content="Adicionar"
-                    Command="{Binding CreateCommand}"/>
+                    Command="{Binding SubmitCommand}"/>
                 <Button
                     Grid.Column="2"
                     Content="Cancelar"

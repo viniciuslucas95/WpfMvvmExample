@@ -1,6 +1,8 @@
 ﻿using System.Windows.Input;
+using WpfMvvmExample.Logic.Commands;
+using WpfMvvmExample.Logic.Stores;
 
-namespace WPFTest.ViewModels;
+namespace WpfMvvmExample.Logic.ViewModels;
 
 public class StudentViewModel : ViewModelBase
 {
@@ -40,11 +42,22 @@ public class StudentViewModel : ViewModelBase
             OnPropertyChanged(nameof(Class));
         }
     }
-    public ICommand CreateCommand { get; private init; }
+    public ICommand SubmitCommand { get; private init; }
     public ICommand CancelCommand { get; private init; }
 
+    private readonly NavigationStore _navigationStore;
     private string _firstName = "";
     private string _lastName = "";
     private int _age = 0;
     private string _class = "";
+
+    public StudentViewModel(NavigationStore navigationStore)
+    {
+        _navigationStore = navigationStore;
+
+        CancelCommand = new ExecuteCommand(() =>
+        {
+            _navigationStore.CurrentViewModel = new StudentsListViewModel(_navigationStore);
+        });
+    }
 }

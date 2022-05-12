@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFTest;
+namespace WpfMvvmExample;
 
 public partial class MainWindow : Window
 {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WPFTest.Views;
+namespace WpfMvvmExample.Views;
 
 public partial class StudentsListView : UserControl
 {

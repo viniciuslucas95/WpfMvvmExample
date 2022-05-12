@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace WPFTest.ViewModels;
+namespace WpfMvvmExample.Logic.ViewModels;
 
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
