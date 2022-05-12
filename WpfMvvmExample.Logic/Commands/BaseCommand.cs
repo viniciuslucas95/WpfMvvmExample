@@ -12,7 +12,7 @@ public abstract class BaseCommand : ICommand
 
     public abstract void Execute(object? parameter);
 
-    protected void OnCanExecuteChanged()
+    public void OnCanExecuteChanged()
     {
         CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }

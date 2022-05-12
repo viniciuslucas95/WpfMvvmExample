@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using WpfMvvmExample.Logic.Commands;
+﻿using WpfMvvmExample.Logic.Commands;
 using WpfMvvmExample.Logic.Stores;
 
 namespace WpfMvvmExample.Logic.ViewModels;
@@ -24,7 +23,7 @@ public class StudentViewModel : ViewModelBase
             OnPropertyChanged(nameof(LastName));
         }
     }
-    public int Age
+    public string Age
     {
         get => _age;
         set
@@ -42,13 +41,13 @@ public class StudentViewModel : ViewModelBase
             OnPropertyChanged(nameof(Class));
         }
     }
-    public ICommand SubmitCommand { get; private init; }
-    public ICommand CancelCommand { get; private init; }
+    public BaseCommand SubmitCommand { get; private init; }
+    public BaseCommand CancelCommand { get; private init; }
 
     private readonly NavigationStore _navigationStore;
     private string _firstName = "";
     private string _lastName = "";
-    private int _age = 0;
+    private string _age = "";
     private string _class = "";
 
     public StudentViewModel(NavigationStore navigationStore)
@@ -59,5 +58,22 @@ public class StudentViewModel : ViewModelBase
         {
             _navigationStore.CurrentViewModel = new StudentsListViewModel(_navigationStore);
         });
+
+        SubmitCommand = new ExecuteCommand(() =>
+        {
+
+        }, CanSubmiteCommandExecute);
     }
+
+    protected override void OnPropertyChanged(string? propertyName)
+    {
+        base.OnPropertyChanged(propertyName);
+
+        SubmitCommand.OnCanExecuteChanged();
+    }
+
+    private bool CanSubmiteCommandExecute()
+        => !string.IsNullOrEmpty(FirstName) &&
+           !string.IsNullOrEmpty(LastName) &&
+           !string.IsNullOrEmpty(Age);
 }
