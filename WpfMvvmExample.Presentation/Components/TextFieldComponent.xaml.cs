@@ -8,7 +8,9 @@ public partial class TextFieldComponent : UserControl
     public static readonly DependencyProperty LabelProperty =
         DependencyProperty.Register("Label", typeof(string), typeof(TextFieldComponent));
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.Register("Text", typeof(string), typeof(TextFieldComponent));
+        DependencyProperty.Register("Text", typeof(string),
+            typeof(TextFieldComponent),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
     public string Label
     {
@@ -19,10 +21,7 @@ public partial class TextFieldComponent : UserControl
     public string Text
     {
         get => (string)GetValue(TextProperty);
-        set
-        {
-            SetValue(TextProperty, value);
-        }
+        set => SetValue(TextProperty, value);
     }
 
     public TextFieldComponent()
