@@ -35,28 +35,28 @@
         <components:TextFieldComponent
             Grid.Row="2"
             Grid.Column="1"
-            Margin="0 10 0 0"
+            Margin="0 10"
             Label="Name"
             Text="{Binding FirstName}"/>
 
         <components:TextFieldComponent
             Grid.Row="3"
             Grid.Column="1"
-            Margin="0 10 0 0"
+            Margin="0 10"
             Label="Sobrenome"
             Text="{Binding LastName}"/>
 
         <components:TextFieldComponent
             Grid.Row="4"
             Grid.Column="1"
-            Margin="0 10 0 0"
+            Margin="0 10"
             Label="Idade"
             Text="{Binding Age}"/>
 
         <components:TextFieldComponent
             Grid.Row="5"
             Grid.Column="1"
-            Margin="0 10 0 0"
+            Margin="0 10"
             Label="Idade"
             Text="{Binding Class}"/>
 

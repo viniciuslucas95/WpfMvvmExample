@@ -3,14 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:WpfMvvmExample.Presentation.Converters"
+             xmlns:constants="clr-namespace:WpfMvvmExample.Presentation.Constants"
              x:Name="root"
              mc:Ignorable="d" 
              d:Background="White">
+    <UserControl.Resources>
+        <converters:ForceFixedWidthConverter x:Key="ForceWidthNumberConverter"/>
+    </UserControl.Resources>
     <UserControl.ContentTemplate>
         <DataTemplate>
-            <Grid Height="38px"
-                  Width="{TemplateBinding Width}"
-                  MinWidth="100px">
+            <Grid Height="{Binding Source={
+                x:Static constants:TextFieldConstants.TEXT_FIELD_HEIGHT}}"
+                Width="{Binding Width, ElementName=root}"
+                MinWidth="{Binding Source={
+                    x:Static constants:TextFieldConstants.MIN_TEXT_FIELD_WIDTH}}">
                 <Canvas>
                     <TextBox
                         VerticalContentAlignment="Center"
@@ -21,7 +28,9 @@
                         Width="{Binding Width,
                             RelativeSource={
                                 RelativeSource AncestorType={
-                                    x:Type Grid}}}"
+                                    x:Type Grid}},
+                            Converter={
+                                StaticResource ForceWidthNumberConverter}}"
                         MinWidth="{Binding MinWidth,
                             RelativeSource={
                                 RelativeSource AncestorType={
@@ -29,7 +38,7 @@
                         Padding="8px 0"
                         FontFamily="Roboto"
                         FontWeight="Medium"
-                        FontSize="14px"
+                        FontSize="12"
                         Text="{Binding Text,
                             ElementName=root,
                             UpdateSourceTrigger=PropertyChanged}"
@@ -42,7 +51,7 @@
                             <TextBlock
                                 Padding="4 0"
                                 FontFamily="Roboto"
-                                FontSize="12px"
+                                FontSize="12"
                                 Text="{Binding Label,
                                     ElementName=root}"
                                 d:Text="Label"/>
