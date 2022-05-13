@@ -6,9 +6,15 @@ namespace WpfMvvmExample.Presentation.Components;
 public partial class TextFieldComponent : UserControl
 {
     public static readonly DependencyProperty LabelProperty =
-        DependencyProperty.Register("Label", typeof(string), typeof(TextFieldComponent));
+        DependencyProperty.Register(
+            "Label",
+            typeof(string),
+            typeof(TextFieldComponent));
+
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.Register("Text", typeof(string),
+        DependencyProperty.Register(
+            "Text",
+            typeof(string),
             typeof(TextFieldComponent),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 

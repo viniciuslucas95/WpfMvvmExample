@@ -61,7 +61,7 @@ public class StudentViewModel : ViewModelBase
         _previousViewModel = previousViewModel;
 
         CancelCommand = new ExecuteCommand(GoBackToPreviousViewModel);
-        SubmitCommand = new ExecuteCommand(CreateStudent, CanSubmiteCommandExecute);
+        SubmitCommand = new ExecuteCommand(CreateStudent, CanSubmitCommandExecute);
     }
 
     protected override void OnPropertyChanged(string? propertyName)
@@ -83,7 +83,7 @@ public class StudentViewModel : ViewModelBase
     private void GoBackToPreviousViewModel()
         => _navigationStore.CurrentViewModel = _previousViewModel;
 
-    private bool CanSubmiteCommandExecute()
+    private bool CanSubmitCommandExecute()
         => !string.IsNullOrEmpty(FirstName) &&
            !string.IsNullOrEmpty(LastName) &&
            !string.IsNullOrEmpty(Age);

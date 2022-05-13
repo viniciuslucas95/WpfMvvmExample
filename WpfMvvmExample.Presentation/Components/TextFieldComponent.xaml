@@ -5,24 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              x:Name="root"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:Background="White">
     <UserControl.ContentTemplate>
         <DataTemplate>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Text="{Binding Label,
-                        ElementName=root}"/>
-                <TextBox 
-                    Grid.Row="1"
-                    Margin="0 10 0 0"
-                    Text="{Binding Text,
-                        ElementName=root,
-                        UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Height="38px"
+                  Width="{TemplateBinding Width}"
+                  MinWidth="100px">
+                <Canvas>
+                    <TextBox
+                        VerticalContentAlignment="Center"
+                        Height="{Binding Height,
+                            RelativeSource={
+                                RelativeSource AncestorType={
+                                    x:Type Grid}}}"
+                        Width="{Binding Width,
+                            RelativeSource={
+                                RelativeSource AncestorType={
+                                    x:Type Grid}}}"
+                        MinWidth="{Binding MinWidth,
+                            RelativeSource={
+                                RelativeSource AncestorType={
+                                    x:Type Grid}}}"
+                        Padding="8px 0"
+                        FontFamily="Roboto"
+                        FontWeight="Medium"
+                        FontSize="14px"
+                        Text="{Binding Text,
+                            ElementName=root,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        d:Text="Text box"/>
+                        <WrapPanel
+                            IsHitTestVisible="False"
+                            Canvas.Top="-8"
+                            Canvas.Left="8"
+                            Background="White">
+                            <TextBlock
+                                Padding="4 0"
+                                FontFamily="Roboto"
+                                FontSize="12px"
+                                Text="{Binding Label,
+                                    ElementName=root}"
+                                d:Text="Label"/>
+                    </WrapPanel>
+                </Canvas>
             </Grid>
         </DataTemplate>
     </UserControl.ContentTemplate>
